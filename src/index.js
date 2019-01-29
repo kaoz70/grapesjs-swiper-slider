@@ -35,9 +35,9 @@ export default grapesjs.plugins.add('grapesjs-swiper-slider', (editor, opts = {}
 
             // Default slides
             slideEls: `
-              <div class="swiper-slide">Slide 1</div>
-              <div class="swiper-slide">Slide 2</div>
-              <div class="swiper-slide">Slide 3</div>
+              <div class="swiper-slide"><p>Slide 1</p></div>
+              <div class="swiper-slide"><p>Slide 2</p></div>
+              <div class="swiper-slide"><p>Slide 3</p></div>
             `,
 
             // Previous nav element string, as for example, an HTML string

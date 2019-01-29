@@ -214,7 +214,6 @@ export default (dc, config = {}) => {
                     }
 
                     const initSlider = function () {
-                        console.log(options);
                         window.sliderSwiper = new Swiper(el, options);
                     };
 
