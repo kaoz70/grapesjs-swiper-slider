@@ -19,8 +19,8 @@ Slider component using [Swiper](http://idangero.us/swiper/)
   * `swipper-slide`
   * `swipper-pagination`
   * `swipper-scrollbar`
-  * `lory-prev`
-  * `lory-next`
+  * `swipper-prev`
+  * `swipper-next`
 * Blocks
   * `swiper-slider`
 
