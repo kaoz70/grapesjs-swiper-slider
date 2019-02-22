@@ -1,7 +1,7 @@
 import constants from '../constants';
 
-export default (dc, config = {}) => {
-    const defaultType = dc.getType('default');
+export default (domComponents, config = {}) => {
+    const defaultType = domComponents.getType('default');
     const defaultModel = defaultType.model;
     const defaultView = defaultType.view;
     const {
@@ -19,7 +19,7 @@ export default (dc, config = {}) => {
         containerId,
     } = constants;
 
-    dc.addType(containerName, {
+    domComponents.addType(containerName, {
 
         model: defaultModel.extend({
             defaults: {
@@ -43,6 +43,21 @@ export default (dc, config = {}) => {
                 loop: false,
                 pagination: 'none',
                 scrollbar: false,
+
+                // Small
+                smallSlidesPerView: 1,
+                smallSpaceBetween: '0',
+                smallSlidesPerGroup: 1,
+
+                // Medium
+                mediumSlidesPerView: 1,
+                mediumSpaceBetween: '0',
+                mediumSlidesPerGroup: 1,
+
+                // Large
+                largeSlidesPerView: 1,
+                largeSpaceBetween: '0',
+                largeSlidesPerGroup: 1,
 
                 traits: [
                     {
@@ -152,6 +167,66 @@ export default (dc, config = {}) => {
                             'progressbar',
                         ]
                     },
+
+                    // Small
+                    {
+                        type: 'number',
+                        label: 'Small Slides Per View',
+                        name: 'smallSlidesPerView',
+                        changeProp: 1,
+                    },
+                    {
+                        type: 'number',
+                        label: 'Small Space Between',
+                        name: 'smallSpaceBetween',
+                        changeProp: 1,
+                    },
+                    {
+                        type: 'number',
+                        label: 'Small Slider Per Group',
+                        name: 'smallSlidesPerGroup',
+                        changeProp: 1,
+                    },
+
+                    // Medium
+                    {
+                        type: 'number',
+                        label: 'Medium Slides Per View',
+                        name: 'mediumSlidesPerView',
+                        changeProp: 1,
+                    },
+                    {
+                        type: 'number',
+                        label: 'Medium Space Between',
+                        name: 'mediumSpaceBetween',
+                        changeProp: 1,
+                    },
+                    {
+                        type: 'number',
+                        label: 'Medium Slider Per Group',
+                        name: 'mediumSlidesPerGroup',
+                        changeProp: 1,
+                    },
+
+                    // Large
+                    {
+                        type: 'number',
+                        label: 'Large Slides Per View',
+                        name: 'largeSlidesPerView',
+                        changeProp: 1,
+                    },
+                    {
+                        type: 'number',
+                        label: 'Large Space Between',
+                        name: 'largeSpaceBetween',
+                        changeProp: 1,
+                    },
+                    {
+                        type: 'number',
+                        label: 'Large Slider Per Group',
+                        name: 'largeSlidesPerGroup',
+                        changeProp: 1,
+                    },
                 ],
 
                 droppable: `${wrapperSelector}, ${prevSelector}, ${nextSelector}, ${scrollbarSelector}, ${paginationSelector}}`,
@@ -159,7 +234,7 @@ export default (dc, config = {}) => {
                 draggable: true,
 
                 style: {
-                    'min-height': '150px;'
+                    'min-height': '50px;'
                 },
 
                 'script-deps': config.script,
@@ -177,7 +252,6 @@ export default (dc, config = {}) => {
                     const styleDeps = '{[ style-deps ]}';
                     const falsies = ['0', 'false', 'none'];
                     const elId = el.getAttribute('id');
-                    const scrollbarName = '{[ scrollbarName ]}';
 
                     const options = {
                         initialSlide: parseInt('{[ initialSlide ]}', 10),
@@ -196,17 +270,37 @@ export default (dc, config = {}) => {
                         navigation: {
                             nextEl: `#${elId} .swiper-button-next`,
                             prevEl: `#${elId} .swiper-button-prev`,
+                        },
+                        breakpointsInverse: true,
+                        breakpoints: {
+                            576: {
+                                slidesPerView: parseInt('{[ smallSlidesPerView ]}', 10),
+                                spaceBetween: parseInt('{[ smallSpaceBetween ]}', 10),
+                                slidesPerGroup: parseInt('{[ smallSlidesPerGroup ]}', 10),
+                            },
+                            768: {
+                                slidesPerView: parseInt('{[ mediumSlidesPerView ]}', 10),
+                                spaceBetween: parseInt('{[ mediumSpaceBetween ]}', 10),
+                                slidesPerGroup: parseInt('{[ mediumSlidesPerGroup ]}', 10),
+                            },
+                            992: {
+                                slidesPerView: parseInt('{[ largeSlidesPerView ]}', 10),
+                                spaceBetween: parseInt('{[ largeSpaceBetween ]}', 10),
+                                slidesPerGroup: parseInt('{[ largeSlidesPerGroup ]}', 10),
+                            },
                         }
                     };
 
-                    if(!falsies.includes('{[ pagination ]}')) {
+                    console.log(options.breakpoints);
+
+                    if (!falsies.includes('{[ pagination ]}')) {
                         options.pagination = {
                             el: `#${elId} .swiper-pagination`,
                             type: '{[ pagination ]}',
                         };
                     }
 
-                    if(isNaN('{[ scrollbar ]}')) {
+                    if (isNaN('{[ scrollbar ]}')) {
                         options.scrollbar = {
                             el: `#${elId} .swiper-scrollbar`,
                             draggable: true,
@@ -261,7 +355,23 @@ export default (dc, config = {}) => {
                     'loop',
                     'pagination',
                     'scrollbar',
+
+                    // Small
+                    'smallSlidesPerView',
+                    'smallSpaceBetween',
+                    'smallSlidesPerGroup',
+
+                    // Medium
+                    'mediumSlidesPerView',
+                    'mediumSpaceBetween',
+                    'mediumSlidesPerGroup',
+
+                    // Large
+                    'largeSlidesPerView',
+                    'largeSpaceBetween',
+                    'largeSlidesPerGroup',
                 ];
+
                 const reactTo = props.map(prop => `change:${prop}`).join(' ');
                 this.listenTo(this.model, reactTo, this.render);
                 const comps = this.model.components();

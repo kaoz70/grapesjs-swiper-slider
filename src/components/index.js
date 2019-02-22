@@ -7,12 +7,13 @@ import Pagination from "./Pagination";
 import Scrollbar from "./Scrollbar";
 
 export default (editor, config = {}) => {
-  const dc = editor.DomComponents;
-  Container(dc, config);
-  Wrapper(dc, config);
-  Slide(dc, config);
-  NavPrev(dc, config);
-  NavNext(dc, config);
-  Pagination(dc, config);
-  Scrollbar(dc, config);
+  const domComponents = editor.DomComponents;
+
+  Container(domComponents, config);
+  Wrapper(domComponents, config);
+  Slide(domComponents, config);
+  NavPrev(domComponents, config);
+  NavNext(domComponents, config);
+  Pagination(domComponents, config);
+  Scrollbar(domComponents, config);
 }
