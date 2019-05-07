@@ -25,7 +25,7 @@ export default (domComponents, config = {}) => {
             defaults: {
                 ...defaultModel.prototype.defaults,
 
-                name: 'Container',
+                name: 'Swiper Slider',
 
                 // Properties
                 initialSlide: '0',
@@ -43,6 +43,14 @@ export default (domComponents, config = {}) => {
                 loop: false,
                 pagination: 'none',
                 scrollbar: false,
+
+                // Autoplay
+                autoplay: true,
+                autoplayDelay: 3000,
+                autoplayStopOnLastSlide: false,
+                autoplayDisableOnInteraction: true,
+                autoplayReverseDirection: false,
+                autoplayWaitForTransition: true,
 
                 // Small
                 smallSlidesPerView: 1,
@@ -100,6 +108,42 @@ export default (domComponents, config = {}) => {
                         type: 'number',
                         label: 'Slides Offset After',
                         name: 'slidesOffsetAfter',
+                        changeProp: 1,
+                    },
+                    {
+                        type: 'checkbox',
+                        label: 'Autoplay',
+                        name: 'autoplay',
+                        changeProp: 1,
+                    },
+                    {
+                        type: 'number',
+                        label: 'Autoplay Delay',
+                        name: 'autoplayDelay',
+                        changeProp: 1,
+                    },
+                    {
+                        type: 'checkbox',
+                        label: 'Autoplay stop on Last slide',
+                        name: 'autoplayStopOnLastSlide',
+                        changeProp: 1,
+                    },
+                    {
+                        type: 'checkbox',
+                        label: 'Autoplay disable on interaction',
+                        name: 'autoplayDisableOnInteraction',
+                        changeProp: 1,
+                    },
+                    {
+                        type: 'checkbox',
+                        label: 'Autoplay reverse direction',
+                        name: 'autoplayReverseDirection',
+                        changeProp: 1,
+                    },
+                    {
+                        type: 'checkbox',
+                        label: 'Autoplay wait for transition',
+                        name: 'autoplayWaitForTransition',
                         changeProp: 1,
                     },
                     {
@@ -251,6 +295,7 @@ export default (domComponents, config = {}) => {
                     const scriptDeps = '{[ script-deps ]}';
                     const styleDeps = '{[ style-deps ]}';
                     const falsies = ['0', 'false', 'none'];
+                    const truthies = ['1', 'true'];
                     const elId = el.getAttribute('id');
 
                     const options = {
@@ -291,12 +336,20 @@ export default (domComponents, config = {}) => {
                         }
                     };
 
-                    console.log(options.breakpoints);
-
                     if (!falsies.includes('{[ pagination ]}')) {
                         options.pagination = {
                             el: `#${elId} .swiper-pagination`,
                             type: '{[ pagination ]}',
+                        };
+                    }
+
+                    if (truthies.includes('{[ autoplay ]}')) {
+                        options.autoplay = {
+                            delay: '{[ autoplayDelay ]}',
+                            stopOnLastSlide: '{[ autoplayStopOnLastSlide ]}',
+                            disableOnInteraction: '{[ autoplayDisableOnInteraction ]}',
+                            reverseDirection: '{[ autoplayReverseDirection ]}',
+                            waitForTransition: '{[ autoplayWaitForTransition ]}',
                         };
                     }
 
@@ -355,6 +408,12 @@ export default (domComponents, config = {}) => {
                     'loop',
                     'pagination',
                     'scrollbar',
+                    'autoplay',
+                    'autoplayDelay',
+                    'autoplayStopOnLastSlide',
+                    'autoplayDisableOnInteraction',
+                    'autoplayReverseDirection',
+                    'autoplayWaitForTransition',
 
                     // Small
                     'smallSlidesPerView',

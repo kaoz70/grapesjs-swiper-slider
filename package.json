@@ -1,6 +1,6 @@
 {
   "name": "grapesjs-swiper-slider",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "GrapesJS Swiper Component",
   "main": "dist/grapesjs-swiper-slider.min.js",
   "scripts": {
